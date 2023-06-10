@@ -4,6 +4,7 @@
 
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
+En este capítulo se muestran las conclusiones sobre el trabajo realizado y se presentan algunas mejoras como posible trabajo futuro.
 
 %----------------------------------------------------------------------------------------
 
@@ -11,24 +12,62 @@
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Conclusiones generales }
+\section{Resultados obtenidos}
 
-La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.
+En este trabajo se completó el diseño, desarrollo y \textit{testing} de un sistema de gestión de cultivos aeropónicos.
 
-Algunas preguntas que pueden servir para completar este capítulo:
-
+Para evaluar los resultados obtenidos del trabajo es importante destacar los siguientes factores:
 \begin{itemize}
-\item ¿Cuál es el grado de cumplimiento de los requerimientos?
-\item ¿Cuán fielmente se puedo seguir la planificación original (cronograma incluido)?
-\item ¿Se manifestó algunos de los riesgos identificados en la planificación? ¿Fue efectivo el plan de mitigación? ¿Se debió aplicar alguna otra acción no contemplada previamente?
-\item Si se debieron hacer modificaciones a lo planificado ¿Cuáles fueron las causas y los efectos?
-\item ¿Qué técnicas resultaron útiles para el desarrollo del proyecto y cuáles no tanto?
+	\item Se cumplió con la planificación en tiempo y forma aunque no se siguió exactamente con el orden de desarrollo planteado para cada tarea.
+	\item No se manifestó ninguno de los riesgos previamente identificados en la planificación.
+	\item Luego de realizar un análisis de los requerimientos, se concluye que todos fueron cumplidos. Sin embargo, como se menciona en la sección \ref{sec:observaciones} se realizaron dos modificaciones en el trabajo que afectaron algunos requerimientos: se decidió reemplazar la aplicación SSR por una PWA y se realizaron modificaciones en los datos a almacenar en el DaaS.
 \end{itemize}
+
+Fueron de gran utilidad los conocimientos adquiridos a lo largo de la especialización. A continuación, se enumeran las asignaturas que tuvieron mayor relevancia:
+\begin{itemize}
+	\item Gestión de proyectos.
+	\item Arquitectura de protocolos.
+	\item Gestión de grandes volúmenes de datos.
+	\item Desarrollo de aplicaciones multiplataforma.
+	\item Ciberseguridad en Internet de las Cosas.
+\end{itemize}
+
+%\section{Conclusiones generales }
+
+%La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.
+
+%Algunas preguntas que pueden servir para completar este capítulo:
+
+%\begin{itemize}
+%\item ¿Cuál es el grado de cumplimiento de los requerimientos?
+%\item ¿Cuán fielmente se puedo seguir la planificación original (cronograma incluido)?
+%\item ¿Se manifestó algunos de los riesgos identificados en la planificación? ¿Fue efectivo el plan de mitigación? ¿Se debió %aplicar alguna otra acción no contemplada previamente?
+%\item Si se debieron hacer modificaciones a lo planificado ¿Cuáles fueron las causas y los efectos?
+%\item ¿Qué técnicas resultaron útiles para el desarrollo del proyecto y cuáles no tanto?
+%\end{itemize}
 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
-\section{Próximos pasos}
 
-Acá se indica cómo se podría continuar el trabajo más adelante.
+\section{Trabajo futuro}
+
+A continuación se detallan las principales líneas de acción para dar continuidad a este trabajo:
+
+\begin{itemize}
+\item Mejorar el \emph{responsive} de las tablas del \emph{frontend}.
+\item Incorporar SSR a la PWA.
+\item Incorporar sensor de pH de la solución nutritiva.
+\item Incorporar sensor de TDS de la solución nutritiva.
+\item Incorporar estadísticas y más gráficos para el \emph{dashboard} de las zonas de cultivo.
+\item Permitir crear más de un dispositivo por zona de cultivo.
+\item Permitir seleccionar qué sensores se quiere asociar a cada dispositivo de las zonas de cultivo.
+\item Desarrollar pruebas unitarias para el \emph{broker}.
+\item Añadir multidioma al sistema utilizando i18n \citep{WEBSITE:ANGULARI18N}.
+\item Permitir al usuario seleccionar las unidades a utilizar en las mediciones, por ejemplo: utilizar Fahrenheit o Celsius para las temperaturas.
+\item Calibrar los sensores del sistema.
+\item Realizar pruebas de campo en un entorno real.
+\item Integrar el sistema en un gabinete.
+\item Desplegar el sistema a un entorno \emph{cloud}.
+\end{itemize}
