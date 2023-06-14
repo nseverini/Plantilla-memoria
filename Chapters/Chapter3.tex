@@ -574,32 +574,18 @@ El \emph{software} del microcontrolador fue desarrollado mediante la plataforma 
 
 %Los datos del sistema son obtenidos de los sensores por el microcontrolador cada un segundo, sin embargo para determinar el caudal diario de la zona de cultivo se crea un acumulador que suma la cantidad de agua por segundo y cuando termina el día es reiniciado.
 
-En el código \ref{cod:conexionWiFi} se presentan los procesos de conexión al Wi-Fi y configuración de los certificados TLS. En las líneas 1 a 14 se obtienen los certificados TLS. En la línea 16 se importa la biblioteca para establecer la conexión. En las líneas 18, 20 y 21 se crean las variables para el cliente de la biblioteca y el nombre y contraseña de la red. En la línea 29 se inicia la conexión con las credenciales de la red. En la línea 43 se ejecuta el método para inicializar la conexión. En las líneas 45 a 47 se aplican los certificados TLS al cliente Wi-Fi.
+En el código \ref{cod:conexionWiFi} se presentan los procesos de conexión al Wi-Fi y configuración de los certificados TLS. En las líneas 1, 2 y 3 se importan las bibliotecas necesarias y las variables de entorno. En las líneas 5 a 7 se crean las variables para el cliente de la biblioteca y el nombre y contraseña de la red. En la línea 15 se inicia la conexión con las credenciales de la red. En las líneas 22 a 25 se monta el sistema de archivos del microcontrolador. En las líneas 27, 28 y 29 se aplican los certificados TLS al cliente Wi-Fi.
 
 \begin{lstlisting}[label=cod:conexionWiFi,caption=Conexión Wi-Fi y configuración de los certificados TLS]
-const char* root_ca = \
-"-----BEGIN CERTIFICATE-----\n" \
-...
-"-----END CERTIFICATE-----\n";
-
-const char* client_ca = \
-"-----BEGIN CERTIFICATE-----\n" \
-...
-"-----END CERTIFICATE-----\n";
-
-const char* private_key = \
-"-----BEGIN PRIVATE KEY-----\n" \
-...
-"-----END CERTIFICATE-----\n";
-
 #include "WiFiClientSecure.h"
+#include "SPIFFS.h"
+#include "secrets.h"
 
-WiFiClientSecure wifi_client;
+WiFiClientSecure wifiClient;
+const char* ssid = SSID;
+const char* password = PASSWORD;
 
-const char* ssid = "...";
-const char* password = "...";
-
-void setup_wifi() {
+void setupWifi() {
   delay(10);
   Serial.println();
   Serial.print("Connecting to ");
@@ -612,54 +598,65 @@ void setup_wifi() {
     Serial.print(".");
   }
 
+  if(!SPIFFS.begin(true)){
+    Serial.println("An Error has occurred while mounting SPIFFS");
+    return;
+  }
+  
+  wifiClient.setCACert(getFileAsString("/ca.crt"));
+  wifiClient.setCertificate(getFileAsString("/esp.crt"));
+  wifiClient.setPrivateKey(getFileAsString("/esp.key"));
+  
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 }
-
-void setup() {
-  setup_wifi();
-
-  wifi_client.setCACert(root_ca);
-  wifi_client.setCertificate(client_ca);
-  wifi_client.setPrivateKey(private_key);
-  
-  ...
-}
 \end{lstlisting}
 
-En el código \ref{cod:conexionMQTT} se presenta el proceso de conexión al \emph{broker} MQTT. En la línea 1 se importa la biblioteca para establecer la conexión Wi-Fi. En la línea 2 se importa la biblioteca utilizada para establecer la conexión MQTT. En las  líneas 4 y 5 se crean las variables para utilizar las dependencias importadas. En las líneas 7 a 11 se crean las variables para la dirección, credenciales y tópicos del \emph{broker}. En la línea 16 se establece la dirección y el puerto del \emph{broker}. En la línea 17 se establece el método de \emph{callback}. En las líneas 21 a 31 se intenta realizar la conexión mientras no esté activa. En las líneas 36 a 39 se ejecuta el método para conectarse al \emph{broker} si la conexión no está activa.
+En el código \ref{cod:conexionMQTT} se presenta el proceso de conexión al \emph{broker} MQTT. En las líneas 1, 2 y 3 se importan las bibliotecas necesarias y las variables de entorno.  En las  líneas 5 y 6 se crean las variables para utilizar las dependencias importadas. En las líneas 8 a 11 se crea un tipo de estructura para agrupar a los \textit{relays}. En las líneas 13 a 17 se crean las variables para la dirección, credenciales y tópicos del \emph{broker}. En las líneas 18 a 20 se crea una variable utilizando la estructura de \textit{relays}. En la línea 23 se establece la dirección y el puerto del \emph{broker}. En la línea 24 se establece el método de \emph{callback}. En las líneas 28 a 44 se intenta realizar la conexión mientras no esté activa. En las líneas 48 a 51 se ejecuta el método para conectarse al \emph{broker} si la conexión no está activa.
 
 \begin{lstlisting}[label=cod:conexionMQTT,caption=Conexión al \emph{broker} MQTT]
 #include "WiFiClientSecure.h"
 #include <PubSubClient.h>
+#include "secrets.h"
 
-WiFiClientSecure wifi_client;
-PubSubClient mqtt_client(wifi_client);
+WiFiClientSecure wifiClient;
+PubSubClient mqttClient(wifiClient);
 
-const char* mqtt_server = "...";
-const char* clientUsername = "...";
-const char* clientPassword = "...";
-const char* deviceId = "...";
-const char* topicRelays = "...";
+typedef struct {
+  int pin;
+  char* id;
+} Relay;
 
-void setup() {
-  ...
+const char* mqttServer = BROKER_IP;
+const char* clientUsername = BROKER_USERNAME;
+const char* clientPassword = BROKER_PASSWORD;
+const char* deviceId = DEVICE_ID;
+const char* topicRelays = "relays/";
+Relay relays[NUM_RELAYS] = {
+  { 16, RELAY_ID }
+};
 
-  mqtt_client.setServer(mqtt_server, 8883);
-  mqtt_client.setCallback(callback);
+void setupMQTT(){
+  mqttClient.setServer(mqttServer, 8883);
+  mqttClient.setCallback(callback);
 }
 
 void reconnect() {
-  while (!mqtt_client.connected()) {
+  while (!mqttClient.connected()) {
     Serial.print("Attempting MQTT connection...");
-    if (mqtt_client.connect(deviceId, clientUsername, clientPassword)) {
+    if (mqttClient.connect(deviceId, clientUsername, clientPassword)) {
       Serial.println("connected");
-      mqtt_client.subscribe(topicRelays);
+      for(int i = 1; i <= NUM_RELAYS; i++){
+        char buffer[64];
+        strcpy(buffer, topicRelays);
+        strcat(buffer, relays[i-1].id);
+        mqttClient.subscribe(buffer);
+      }
     } else {
       Serial.print("failed, rc=");
-      Serial.print(mqtt_client.state());
+      Serial.print(mqttClient.state());
       Serial.println(" try again in 5 seconds");
       delay(5000);
     }
@@ -667,11 +664,10 @@ void reconnect() {
 }
 
 void loop() {
-  if (!mqtt_client.connected()) {
+  if (!mqttClient.connected()) {
     reconnect();
   }
-  mqtt_client.loop();
-  
+  mqttClient.loop();
   ...
 }
 \end{lstlisting}
