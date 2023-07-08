@@ -58,7 +58,7 @@ Es importante destacar que todas las conexiones realizadas entre los componentes
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{./Figures/Diagrama en bloques v10.png}
+	\includegraphics[width=1.00\textwidth]{./Figures/Diagrama en bloques v10.png}
 	\caption{Diagrama en bloques de la solución.}
 	\label{fig:diagramaEnBloques}
 \end{figure}
@@ -93,7 +93,7 @@ Es la colección que contiene los datos de las zonas de cultivo. Se presenta su 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.5\textwidth]{./Figures/Coleccion Zones.png}
+	\includegraphics[width=.6\textwidth]{./Figures/Coleccion Zones.png}
 	\caption{Interface de la colección \textit{Zones}.}
 	\label{fig:coleccionZones}
 \end{figure}
@@ -177,7 +177,7 @@ La autenticación ocurre cuando un usuario quiere acceder a un recurso protegido
 
 Todos los \textit{endpoints} del sistema, excepto el de registro de usuarios y el de inicio de sesión, requieren el JWT del usuario para poder ser consultados. Si el usuario no envía el JWT, la API responde con un código de error 401. 
 
-En el código \ref{cod:autenticaciónBackend} se presenta el proceso de autenticacion de los usuarios mediante un \emph{middleware} que protege los \emph{endpoints}. En las líneas 6 a 11 se obtiene el JWT del \textit{authorization header} \citep{WEBSITE:HTTPHEADERAUTHORIZATION} de la \emph{request} y se valida que no sea nulo. En la línea 14 se verifica el JWT mediante la biblioteca jsonwebtoken. En las líneas 15 y 16 se guarda el id e \textit{email} del usuario en la respuesta HTTP.
+En el código \ref{cod:autenticaciónBackend} se presenta el proceso de autenticación de los usuarios mediante un \emph{middleware} que protege los \emph{endpoints}. En las líneas 6 a 11 se obtiene el JWT del \textit{authorization header} \citep{WEBSITE:HTTPHEADERAUTHORIZATION} de la \emph{request} y se valida que no sea nulo. En la línea 14 se verifica el JWT mediante la biblioteca jsonwebtoken. En las líneas 15 y 16 se guarda el id e \textit{email} del usuario en la respuesta HTTP.
 
 \begin{lstlisting}[label=cod:autenticaciónBackend,caption=Autenticación de usuarios mediante un \emph{middleware}.]
 export const authorization = (
@@ -297,13 +297,14 @@ En la figura \ref{fig:certificadosTLSDelFrontend} se presenta la configuración 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.6\textwidth]{./Figures/Certificados TLS en Angular.png}
+	\includegraphics[width=.7\textwidth]{./Figures/Certificados TLS en Angular.png}
 	\caption{Uso de certificados TLS.}
 	\label{fig:certificadosTLSDelFrontend}
 \end{figure}
 
 La PWA utiliza un \emph{guard} para la autenticación de las rutas.  En el código \ref{cod:autenticaciónFrontend} se presenta el proceso de autenticación de las rutas. En la línea 7 se obtiene el estado de la sesión del usuario. En las líneas 9 a 13 se verifica su estado: si inició sesión puede entrar a la ruta, caso contrario se le redirecciona a la pantalla del \emph{login}.
 
+\newpage
 \begin{lstlisting}[label=cod:autenticaciónFrontend,caption=Autenticación de rutas.]
 export const authGuard = (
   route: ActivatedRouteSnapshot,
@@ -368,7 +369,7 @@ En la figura \ref{fig:estructuraDeDirectoriosDelFrontend} se presenta la estruct
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.3\textwidth]{./Figures/Estructura de directorios del frontend.png}
+	\includegraphics[width=.4\textwidth, height=1.35\linewidth]{./Figures/Estructura de directorios del frontend.png}
 	\caption{Estructura de directorios.}
 	\label{fig:estructuraDeDirectoriosDelFrontend}
 \end{figure}
@@ -418,7 +419,7 @@ En la figura \ref{fig:notificacionAlarmaEmail} se visualiza un ejemplo de \texti
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{./Figures/Notificacion email.png}
+	\includegraphics[width=.8\textwidth]{./Figures/Notificacion email.png}
 	\caption{Ejemplo de \textit{email} de notificación de alarma.}
 	\label{fig:notificacionAlarmaEmail}
 \end{figure}
@@ -500,6 +501,7 @@ mqttServer.listen(mqttPort, () => {
 
 El \emph{broker} utiliza como medida extra de seguridad un proceso de autenticación mediante usuario y contraseña. En el código \ref{cod:autenticaciónBroker} se presenta el proceso de autenticación de los clientes. En las líneas 7 a 12 se verifica que el usuario y contraseña del cliente sea válido. En la línea 13 se autentica al cliente. En las líneas 16 a 19 se entrega  al cliente un error que indica que el usuario o la contraseña son inválidos.
 
+\newpage
 \begin{lstlisting}[label=cod:autenticaciónBroker,caption=Autenticación de clientes.]
 aedes.authenticate = (
    _client: Client,
@@ -525,6 +527,7 @@ aedes.authenticate = (
 
 En el código \ref{cod:procesoPublishBroker} se presenta el proceso de validación de mensajes publicados en los tópicos. En las líneas 8 a 11 se verifica que el tópico del mensaje sea válido. En las líneas 12 a 13 se le entrega al cliente un error que indica que no está autorizado para publicar el mensaje. En las líneas 18 a 21 se obtiene el \emph{payload} del mensaje para crear una nueva medición. En las líneas 23 a 28 se le entrega al cliente un error si la medición no pudo ser creada. En la línea 32 se indica que el mensaje publicado es válido.
 
+\newpage
 \begin{lstlisting}[label=cod:procesoPublishBroker,caption=Validación de mensajes.]
 aedes.authorizePublish = async (
    client: Client | null,
@@ -576,6 +579,7 @@ El \emph{software} del microcontrolador fue desarrollado mediante la plataforma 
 
 En el código \ref{cod:conexionWiFi} se presentan los procesos de conexión al Wi-Fi y configuración de los certificados TLS. En las líneas 1, 2 y 3 se importan las bibliotecas necesarias y las variables de entorno. En las líneas 5 a 7 se crean las variables para el cliente de la biblioteca y el nombre y contraseña de la red. En la línea 15 se inicia la conexión con las credenciales de la red. En las líneas 22 a 25 se monta el sistema de archivos del microcontrolador. En las líneas 27, 28 y 29 se aplican los certificados TLS al cliente Wi-Fi.
 
+\newpage
 \begin{lstlisting}[label=cod:conexionWiFi,caption=Conexión Wi-Fi y configuración de los certificados TLS]
 #include "WiFiClientSecure.h"
 #include "SPIFFS.h"
@@ -616,6 +620,7 @@ void setupWifi() {
 
 En el código \ref{cod:conexionMQTT} se presenta el proceso de conexión al \emph{broker} MQTT. En las líneas 1, 2 y 3 se importan las bibliotecas necesarias y las variables de entorno.  En las  líneas 5 y 6 se crean las variables para utilizar las dependencias importadas. En las líneas 8 a 11 se crea un tipo de estructura para agrupar a los \textit{relays}. En las líneas 13 a 17 se crean las variables para la dirección, credenciales y tópicos del \emph{broker}. En las líneas 18 a 20 se crea una variable utilizando la estructura de \textit{relays}. En la línea 23 se establece la dirección y el puerto del \emph{broker}. En la línea 24 se establece el método de \emph{callback}. En las líneas 28 a 44 se intenta realizar la conexión mientras no esté activa. En las líneas 48 a 51 se ejecuta el método para conectarse al \emph{broker} si la conexión no está activa.
 
+\newpage
 \begin{lstlisting}[label=cod:conexionMQTT,caption=Conexión al \emph{broker} MQTT]
 #include "WiFiClientSecure.h"
 #include <PubSubClient.h>

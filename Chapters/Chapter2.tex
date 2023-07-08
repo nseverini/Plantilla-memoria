@@ -18,7 +18,7 @@ Sigue el clásico modelo cliente-servidor \citep{WEBSITE:CLIENTESERVIDOR}, en el
 
 Se trata de un protocolo sin estados \citep{WEBSITE:PROTOCOLOSINESTADO}, lo cual significa que el servidor no guarda información entre dos peticiones distintas. 
 
-Aunque en la mayoría de casos se basa en una conexión del tipo TCP/IP (del inglés \textit{Transmission Control Protocol/Internet Protocol}) \citep{WEBSITE:TCPIP} y se puede usar sobre cualquier capa de transporte \citep{WEBSITE:CAPADETRANSPORTE} segura o de confianza.
+En la mayoría de casos se basa en una conexión del tipo TCP/IP (del inglés \textit{Transmission Control Protocol/Internet Protocol}) \citep{WEBSITE:TCPIP} y se puede usar sobre cualquier capa de transporte \citep{WEBSITE:CAPADETRANSPORTE} segura o de confianza.
 
 Las características claves de HTTP son:
 \begin{itemize}
@@ -68,9 +68,9 @@ La comunicación MQTT utiliza el protocolo SSL para proteger los datos confidenc
 
 \subsection{WebSocket}
 
-WebSocket es una tecnología que proporciona un canal de comunicación bidireccional y full-dúplex \citep{WEBSITE:FULLDUPLEX} sobre un único \textit{socket} TCP \citep{WEBSITE:TCP}. Está diseñada para ser implementada en navegadores y servidores web, pero puede utilizarse por cualquier aplicación cliente/servidor. Además, puede utilizar SSL para las conexiones seguras y la transmisión de datos.
+WebSocket es una tecnología que proporciona un canal de comunicación bidireccional y full-dúplex \citep{WEBSITE:FULLDUPLEX} sobre un único \textit{socket} TCP \citep{WEBSITE:TCP}. Está diseñada para ser implementada en navegadores y servidores web, pero puede utilizarse en cualquier aplicación cliente/servidor. Además, puede utilizar SSL para las conexiones seguras y la transmisión de datos.
 
-WebSocket utiliza un secuencia de solicitud-respuesta HTTP estándar para establecer una conexión. Una vez formada, la API WebSocket proporciona una interfaz de lectura y escritura de datos entre las partes de modo dúplex asíncrono. También proporciona una interfaz para el cierre asíncrono de la conexión desde cualquier lado.
+WebSocket utiliza una secuencia de solicitud-respuesta HTTP estándar para establecer una conexión. Una vez formada, la API WebSocket proporciona una interfaz de lectura y escritura de datos entre las partes de modo dúplex asíncrono. También proporciona una interfaz para el cierre asíncrono de la conexión desde cualquier lado.
 
 En la figura \ref{fig:ejemploDeComunicacionEnWebSocket} se presenta un ejemplo de comunicación WebSocket, en el que puede observarse cómo interactúan el cliente y el servidor.
 
@@ -141,7 +141,7 @@ La elección del sensor DHT22 es debida a su mejor resolución y precisión fren
 
 \subsection{Sensor de intensidad de luz}
 
-El módulo Bh1750 \citep{WEBSITE:BH1750} es un sensor de intensidad de luz que esta compuesto por un conversor A/D (del inglés \textit{Analog to Digital}) \citep{WEBSITE:CONVERSORAD} de 16 bits. La principal ventaja del sensor es que brinda la intensidad luminosa en unidades de Lux.
+El módulo Bh1750 \citep{WEBSITE:BH1750} es un sensor de intensidad de luz que está compuesto por un conversor A/D (del inglés \textit{Analog to Digital}) \citep{WEBSITE:CONVERSORAD} de 16 bits. La principal ventaja del sensor es que brinda la intensidad luminosa en unidades de Lux.
 
 La fotografía del sensor Bh1750 se presenta en la figura \ref{fig:fotografiaBh1750}.
 
@@ -194,7 +194,7 @@ La elección del sensor YF-S201B es debida a su bajo costo en el mercado naciona
 
 \subsection{Sensor digital de temperatura para líquidos}
 
-El módulo DS18B20 \citep{WEBSITE:DS18B20} sumergible es un sensor digital de temperatura que utiliza el protocolo 1-Wire \citep{WEBSITE:1WIRE} para comunicarse, el cual necesita solo un pin de datos y permite conectar más de un sensor en el mismo bus. La temperatura de funcionamiento es desde los -55 °C hasta los 125 °C y con una resolución programable desde 9 hasta 12 bits.
+El módulo DS18B20 \citep{WEBSITE:DS18B20} sumergible es un sensor digital de temperatura que utiliza el protocolo 1-Wire \citep{WEBSITE:1WIRE} para comunicarse, el cual necesita solo un pin de datos y permite conectar más de un sensor en el mismo bus. La temperatura de funcionamiento abarca desde los -55 °C hasta los 125 °C y posee una resolución programable desde 9 hasta 12 bits.
 
 La fotografía del sensor DS18B20 sumergible se presenta en la figura \ref{fig:fotografiaDS18B20}.
 
@@ -352,13 +352,13 @@ En lugar de guardar los datos en tablas, tal y como se hace en las bases de dato
 
 En la figura \ref{fig:ejemploDeModeladoDeDatosEnMongoDB} se presenta un ejemplo de modelado de datos en MongoDB, en el que puede observarse el formato de un documento BSON.
 
+\newpage
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.8\textwidth]{./Figures/Ejemplo de modelado de datos en MongoDB.png}
 	\caption{Ejemplo de modelado de datos en MongoDB \protect\footnotemark.}
 	\label{fig:ejemploDeModeladoDeDatosEnMongoDB}
 \end{figure}
-
 \footnotetext{Imagen tomada de \url{https://www.mongodb.com/docs/manual/core/document/}}
 
 La elección de MongoDB se debe a los siguientes factores: 

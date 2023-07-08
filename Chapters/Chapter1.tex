@@ -41,7 +41,7 @@ En la figura \ref{fig:zonaDeCultivoAeroponica} se presenta un típico ejemplo de
 
 El crecimiento aeropónico es considerado seguro y ecológico por producir cosechas de forma natural manteniendo las plantas saludables. Su principal ventaja ecológica frente a otros sistemas es la conservación de agua, energía y nutrientes  \citep{WEBSITE:AEROPONIA2}. 
 
-Una de sus características más importante es que requieren poco contacto físico con el sistema radicular del cultivo, para no interferir con el crecimiento y expansión natural de las raíces y lograr un intercambio limpio de agua y aire. Por esta razón, en comparación con las plantas hidropónicas, los cultivos tienden a crecer más rápido y a absorber más nutrientes, ya que están expuestas a más oxígeno. A su vez, hay menos amenazas de enfermedades alrededor de la zona de la raíz ya que no hay lugar para que residan los desechos \citep{WEBSITE:AEROPONIA3}.
+Una de sus características más importante es que requieren poco contacto físico con el sistema radicular del cultivo, para no interferir con el crecimiento y expansión natural de las raíces y lograr un intercambio limpio de agua y aire. Por esta razón, en comparación con las plantas hidropónicas, los cultivos tienden a crecer más rápido y a absorber más nutrientes, ya que están expuestos a más oxígeno. A su vez, hay menos amenazas de enfermedades alrededor de la zona de la raíz ya que no hay lugar para que residan los desechos \citep{WEBSITE:AEROPONIA3}.
 
 En la figura \ref{fig:diagramaAeroponia} puede observarse el diagrama de un cultivo aeropónico junto con su proceso de nebulización. 
 
@@ -68,7 +68,7 @@ El trabajo incluye:
 	\item Diseño y desarrollo de una API (del inglés \textit{application programming interface}) \citep{WEBSITE:API} REST (del inglés \textit{representational state transfer}) \citep{WEBSITE:REST} que permita la comunicación por medio de los protocolos HTTP (del inglés \textit{Hypertext Transfer Protocol}) \citep{WEBSITE:HTTP}, MQTT (del inglés \textit{Message Queue Telemetry Transport}) \citep{WEBSITE:MQTT} y WebSocket \citep{WEBSITE:WEBSOCKET}.
 	\item Diseño de un modelo de datos a utilizar por el DaaS (del inglés \textit{data as a service}) \citep{WEBSITE:DAAS} que permita almacenar los datos.
 	\item Configuración y despliegue del DaaS.
-	\item Diseño y desarrollo de un \textit{broker} que permita la comunicación por medio de los protocolos MQTT y WebSockets.
+	\item Diseño y desarrollo de un \textit{broker} que permita la comunicación por medio de los protocolos MQTT y WebSocket.
 	\item Desarrollo del \emph{software} del microcontrolador para realizar una prueba de concepto.
 \end{itemize}
 
@@ -85,7 +85,7 @@ El trabajo no incluye:
 
 \section{Estado del arte}
 
-Se llevó a cabo una búsqueda de sistemas similares en el mercado nacional, pero solo se encontró un producto que ofrece características comparables o que cuente con documentación suficiente para una comparación adecuada. Por este motivo, se decidió incluir en la búsqueda sistemas del mercado internacional y publicaciones científicas. 
+Se llevó a cabo una búsqueda de sistemas similares en el mercado nacional, pero solo se encontró un producto que ofrece características comparables o que cuenta con documentación suficiente para una comparación adecuada. Por este motivo, se decidió incluir en la búsqueda sistemas del mercado internacional y publicaciones científicas. 
 
 En la tabla \ref{tab:comparativaSolucionesNacionalesInternacionales} se presenta la comparación de las características y funcionalidades de los sistemas comerciales encontrados en el mercado nacional e internacional.
 
@@ -142,7 +142,7 @@ En la tabla \ref{tab:comparativaSolucionesPublicacionesCientificas} se presenta 
 
 Se considera que la escalabilidad para incorporar nuevos sensores en las dos soluciones anteriores es media, debido a las estructuras planteadas a nivel aplicación. 
 
-Es importante destacar que ambas soluciones fueron ejecutadas y probadas, es decir no son publicaciones teóricas. 
+Es importante destacar que ambas soluciones fueron ejecutadas y probadas, es decir, no son publicaciones teóricas. 
 
 \begin{table}[H]
 	\centering
@@ -177,7 +177,7 @@ Se organizaron los requerimientos en secciones de acuerdo con su relación a las
 	\item Requerimientos asociados a la aplicación SSR:
 		\begin{enumerate}
 			\item Deberá estar configurada para utilizar certificados TLS.
-			\item Deberá estar configurada para poder enviar y recibir información mediante los protocolos HTTP y WebSockets.
+			\item Deberá estar configurada para poder enviar y recibir información mediante los protocolos HTTP y WebSocket.
 			\item Deberá incluir el renderizado de la aplicación web en el servidor.
 			\item Deberá contar con una interfaz de usuario para permitir el inicio de sesión en el sistema.
 			\item Deberá contar con una interfaz de usuario para permitir la creación y modificación de usuarios.
@@ -192,7 +192,7 @@ Se organizaron los requerimientos en secciones de acuerdo con su relación a las
 	\item Requerimientos asociados a la API REST:
 		\begin{enumerate}
 			\item Deberá estar configurada para utilizar certificados TLS.
-			\item Deberá estar configurada para poder enviar y recibir información mediante los protocolos HTTP, WebSockets y MQTT.
+			\item Deberá estar configurada para poder enviar y recibir información mediante los protocolos HTTP, WebSocket y MQTT.
 			\item Deberá incluir los \textit{endpoints} para realizar la alta y la modificación de usuarios.
 			\item Deberá incluir los \textit{endpoints} para realizar el CRUD de zonas.
 			\item Deberá incluir los \textit{endpoints} para realizar el CRUD de alarmas.
@@ -215,7 +215,7 @@ Se organizaron los requerimientos en secciones de acuerdo con su relación a las
 	\item Requerimientos asociados al \textit{broker}:
 		\begin{enumerate}
 			\item Deberá estar configurado para utilizar certificados TLS.
-			\item Deberá estar configurado para poder enviar y recibir información mediante los protocolos MQTT y WebSockets.
+			\item Deberá estar configurado para poder enviar y recibir información mediante los protocolos MQTT y WebSocket.
 		    \item Deberá contar con un módulo de autenticación y autorización de dispositivos.
 			\item Deberá permitir la conexión de múltiples microcontroladores de manera simultánea.
 			\item Deberá permitir la activación de los \textit{relays} disponibles.
